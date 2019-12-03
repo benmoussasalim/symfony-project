@@ -55,6 +55,11 @@ class Produit
      */
     private $avis;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantite;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
@@ -164,6 +169,18 @@ class Produit
                 $avi->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }
