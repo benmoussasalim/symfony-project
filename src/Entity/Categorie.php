@@ -30,7 +30,6 @@ class Categorie
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="categorie")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $categorie;
 

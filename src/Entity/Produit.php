@@ -18,10 +18,7 @@ class Produit
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $type;
+
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -46,7 +43,6 @@ class Produit
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Commande", inversedBy="Produits")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $commande;
 
@@ -60,6 +56,17 @@ class Produit
      */
     private $quantite;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Marque", inversedBy="produit")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $marque;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateCreation;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
@@ -70,17 +77,7 @@ class Produit
         return $this->id;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
 
-    public function setType(?string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
 
     public function getNom(): ?string
     {
@@ -181,6 +178,30 @@ class Produit
     public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getMarque(): ?Marque
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(?Marque $marque): self
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }

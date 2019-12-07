@@ -86,8 +86,11 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $request->request->get('username')]);
-dd($user);
-        return new RedirectResponse($this->urlGenerator->generate('login'));
+if($user->getRoles() && $user->getRoles()[0] && $user->getRoles()[0]=="SUPERADMIN")
+        return new RedirectResponse($this->urlGenerator->generate('accueiladmin'));
+
+else
+    return new RedirectResponse($this->urlGenerator->generate('produit'));
 //        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
